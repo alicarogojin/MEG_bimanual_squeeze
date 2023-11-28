@@ -1,1 +1,1 @@
-# MEG_bimanual_squeeze
+# Bimanual squeeze experiment MEG analysis pipeline
