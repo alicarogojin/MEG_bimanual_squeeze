@@ -1,0 +1,165 @@
+###########################################################
+## Setting up the MEG and Presentation data for analysis ##
+###########################################################
+
+This is for TESTING new code in /auto/iduna/arogojin/bilateral_squeeze_test
+
+###########################
+#### Presentation data ####
+###########################
+
+Presentation data (log files) are stored locally on Ringneck (in the MEG lab)
+Need to copy the log files for each participant onto a USB
+
+Two log files are created per participant (unless a run is aborted):
+-- One log file for the practice run at the start of the experiment
+-- One log file for the remaining 6 experimental runs
+
+Use Alisha's python script () to clean up the data and plot the figures for each condition
+
+
+#############################################
+#### Copying code to server for analysis ####
+#############################################
+
+Below will be a list of different scripts that will be used to preprocess the MEG data
+
+#### STEP 1: Copy all scripts to main experiment directory in auto/iduna/arogojin/bilateral_squeeze_test
+To copy code from your local computer to the magneto server (auto/iduna/arogojin/bilateral_squeeze_test):
+-- "test_transfer_code.sh"
+
+	$ scp /Users/connectome/Documents/Postdoc/Baycrest/MEG_bimanual/MEG/iduna_code-test/test_addMarkers.sh arogojin@172.24.4.37:/auto/iduna/arogojin/bilateral_squeeze_test
+	$ enter Baycrest password
+
+#### STEP 2: To then run this script, need to access the magneto server
+
+	$ ssh -Y arogojin@172.24.4.37					## access magneto vm4
+	$ cd /auto/iduna/arogojin/bilateral_squeeze_test			## access Iduna
+	$ tcsh -x test_addMarkers.sh		## runs the code, can replace "test_addMarkers.sh" with any other script
+
+
+#########################
+#### MEG data access ####
+#########################
+
+MEG data needs to be copied from the meg server to one of our local rri_disks for analysis
+
+Create a raw data folder for the experiment (can do this in FileZilla)
+-- auto/iduna/arogojin/bilateral_squeeze_test
+
+#### Run the data transfer batch script
+-- "test_transfer_MEG_data.sh"
+
+	Input:
+		Will ask for participant ID, date of MEG, and runs (001, 002, 003...)
+	Process:
+		This will copy over over 6 directories (for the 6 runs): [participant_ID]_AEF01_[YYYYMMDD]_*
+		(* = 001.ds, 002.ds, 003.ds, 004.ds, 005.ds, 006.ds) from the MEG server (meg@172.24.4.22)
+		to auto/iduna/arogojin/bilateral_squeeze_test into the RAWMEG folder.
+	Output:
+		.ds files in the RAWMEG/[YYYYMMDD] folder
+
+
+################################
+#### MEG data preprocessing ####
+################################
+
+#### STEP 1: Add markers to the continuous meg datasets according to the Presentation triggers
+-- "test_addMarkers.sh"
+*** Special Cases
+test_addMarkers_pilot.sh: for subjects 20284 and 20353, who had an older Presentation script with different
+													portcodes that we then adjusted and fixed for all subsequent participants
+***
+
+	Input:
+		.ds files collected from the Acquisition
+	Process:
+		For visual stimuli, detect triggers sent from Presentation top left corner green pixel (UPPT002),
+		and mark them as markers in the .ds files or different stimuli and response events
+	Output:
+		.ds files with markers & .evt files with bundled events made by scanMarker()
+
+
+#### STEP 2: Epoch conditions into 1 second epochs to analyse data as a block design
+-- "test_setup_epochs_1sec.sh"
+*** Special Cases
+test_setup_epochs_1sec_20284.sh: due to slightly different rest periods - after this runs, need to go into
+																the "rest_${run}_epoch_begintimes.evt" files and delete all times except for
+																~197s and ~414s before running "test_setup_epochs_1sec_20284_rest.sh"
+test_setup_epochs_1sec_20284_rest.sh: uses the custom python script to create correct rest epochs
+test_setup_epochs_1sec_20353.sh: due to slightly different rest periods - after this runs, need to go into
+																the "rest_${run}_epoch_begintimes.evt" files and delete all times except for
+																~197s and ~414s before running "test_create_epochs_1sec_20353.sh" in STEP 3
+***
+
+	Input:
+		.ds files with markers added from STEP 1 above
+	Process:
+		(1) Uses scanMarkers() to find the first existing noTap marker for each condition (marks the start of the
+		movement for every condition)
+		(2) Uses a custom python script ("test_make_epoch_times_1sec.py") to generate a .prn file (text files
+		used for specifying marker times to addMarker()) specifying the onset times for the intended 1 second epochs
+		(3) Uses addMarker() to add the new 1 second markers based on the .prn file
+	Output:
+		.ds files with new 1 second markers
+
+
+#### STEP 3: Epoch the data based on the new 1 second markers & combine all 6 runs
+-- "test_create_epochs_1sec.sh"
+*** Special Cases
+test_create_epochs_1sec_20284.sh: due to slightly different rest periods and needing to choose only runs 2, 3, 5, and 6
+test_create_epochs_1sec_20353.sh: essentially the same as for subsequent participants after fixing the .evt in STEP 2,
+																	but processed separately anyway as they were a pilot subject
+***
+
+	Input:
+		.ds files with new 1-second markers from STEP 2 above
+	Dependencies:
+		"baseline_corr_bilateralsqueeze.cfg"
+	Process:
+		(1) Epoch the raw data into trials based on the new 1-second markers using newDs()
+		(2) Combine all conditions across all 6 runs into a single .ds file using grandDs()
+	Output:
+		.ds files with epoched trials in EPOCHED subdirectory
+		.ds file with all runs of each condition combined into a single GRAND_DS file
+
+
+#### STEP 4: Make the MRI head model
+-- "download&unzip_MRI.sh"
+		This script downloads MRI scans from the XNAT server to our server.
+		Get them in .nii format. Put under auto/iduna/arogojin/bilateral_squeeze_test/MRI/${subj}/anat/.
+
+		Open up Brainsight in the TMS room, look at participant fiducial point pictures and mark them on Brainsight.
+		Take screenshots of the fiducial points on Brainsight and save to the server.
+		Mark fiducial points in the .mprage or .nii file in AFNI according to the screenshots.
+		Fiducial points were only marked for aligning the MRI to MEG head space (orthogonal: forward tilting).
+
+-- "make_headmodel_bilateralsqueeze.sh"
+*** Copy each line separately into Terminal/MobaXTerm, it does not run as a script on its own since you have to
+do some work in Step 2 before it can run the rest ***
+
+	Input:
+		The structural MRI scan in .nii format copied from XNAT.
+	Process:
+		(1) Align structural MRI with fiducials with the MEG CTF space (forward tilt)
+		(2) Strip skull
+		(3) Build 3D brain hull
+		(4) Wrap dataset to MNI space with ANTS transformation and Multisphere transform
+		(5) Inverse wrap from the MNI space to individual brains to get the 116 atlas brain regions
+		(6) *** Run "changeheadpos_continuous_data" ***
+		(7) Use Multisphere to make head model for MEG source localization
+	Dependencies:
+		-- "changeheadpos_continuous_data":
+		This script does a sanity check of the continuous head location in the MEG dataset.
+		If all looks good, average over all head positions.
+		Input:
+			.ds MEG dataset for each run
+		Process:
+			(1) Plot in Matlab the head movement across each run.
+			(2) Average across the whole run as the head location for the run.
+	Output:
+			bilateral_squeeze_test/beginMatch.ds with head position corrected to the average of the continuous head position
+
+
+#### STEP 5: Make the MRI head model
+-- "test_doSAM_bilateralsqueeze_beta_ERD.sh"
