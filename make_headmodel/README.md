@@ -14,7 +14,6 @@ Now that we've created the mprage file through 3dCopy,
 * define Datamode -> plugins -> edit tagset
 * dataset -> select the mprage+orig file -> apply -> set
 * paste this Tag File: `/auto/baucis/jed/sw/brainhulllib/null.tag` >> Read
-
 * open up Brainsight fiducial point screenshots using `eog` command in a shell
 * mark the fiducial points in AFNI accoridng to the screenshots
    * click on nasion -> match the three slices with Brainsight
