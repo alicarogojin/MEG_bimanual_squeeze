@@ -1,14 +1,4 @@
 
-```bash
-### Look out for special cases
-# for 15434 special case
-3dcopy /rri_disks/eugenia/meltzer_lab/mridata2023/proc/${subj}/6_T1_MPRAGE_OB-AXIAL_T1_MPRAGE_OB-AXIAL.nii ./${subj}_mprage.nii
-
-
-# for 20122 special case
-# Need to run this scrip twice with two different fiducial placements since we changed the fiducial location before the beginMatch run
-# created anat1 and anat2 2 folders
-```
 ## 1) Copy MRI scans to the following formats: NIfTI, ANFI.
 Run this in a shell:
 ```bash
@@ -18,17 +8,19 @@ Run this in a shell:
 ## 2) Mark fiducial points in AFNI
 There's a video walkthrough for this part on Google Drive.
 
-Now that we've already created the mprage file through 3dCopy,
-* open `afni` (Run in a shell: `afni &`),
-* open the mprage+orig anatomical file
+Now that we've created the mprage file through 3dCopy,
+* open `afni` (Run in a shell: `afni &`)
 * `EditEnv -> AFNI_LEFT_IS_LEFT` set to `no`
-* open dataset in `afni`, Define `Datamode -> Plugins -> edit tagset`
-* load in anatomical dataset
-* paste in this as tag file, after clicking `>>read`:
-    * `/home/jed/data/sw/brainhulllib/null.tag`
-* open up Brainsight fiducial point screenshots using `eog` in a shell
+* define Datamode -> plugins -> edit tagset
+* dataset -> select the mprage+orig file -> apply -> set
+* paste this Tag File: `/auto/baucis/jed/sw/brainhulllib/null.tag` >> Read
+
+* open up Brainsight fiducial point screenshots using `eog` command in a shell
 * mark the fiducial points in AFNI accoridng to the screenshots
-* save the markers in afni
+   * click on nasion -> match the three slices with Brainsight
+   * ls
+   * click set
+   * repeat for left and right ear -> Save -> Done
 * Close afni
 
 ## 3) Create brainhull
