@@ -4,12 +4,28 @@
 	# Skull stripping
 	# Approximating inner skull surface
 
+# Set relevant dataset information to be preprocessed
+echo "Enter the participant ID: "
+set subj = "$<"
+
+# If the subject directory in PROC doesn't exist, create it
+if ( -e /auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj} ) then
+   echo "Directory PROC/${subj} exists"
+else
+   mkdir /auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj}
+   echo "Directory PROC/${subj} created"
+endif
+
+set exp_folder = '/auto/iduna/arogojin/bilateral_squeeze_test'
+set workdir = ${exp_folder}/PROC/${subj}
+
 # We set libdir just to say where the code lives for the brainhull package
 set libdir = /home/jed/data/sw/brainhulllib
 
 # Warping into ortho space
 # Use 3dTagalign to "rotate" the person's original MRI into the coordinate space of CTF, defined by the three fiducial points
 # The resulting brain, called "ortho" is quite slanted
+
 cd ${workdir}/anat
 3dTagalign -matvec orthomat -prefix ./ortho -master $libdir/master+orig mprage+orig
 
