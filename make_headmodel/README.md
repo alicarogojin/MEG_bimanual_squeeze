@@ -25,13 +25,13 @@ Now that we've created the mprage file through 3dCopy:
 ## 3) Create brainhull
 Run this in a shell:
 ```bash
-./create_brainhull.sh
+tcsh -x create_brainhull.sh
 ```
 
 ## 4) Warp dataset to MNI space
 Run this in a shell:
 ```bash
-./warp_anat.sh
+tcsh -x warp_anat.sh
 ```
 
 ## 4) Change head position coordinates
@@ -53,5 +53,5 @@ chmod 774 changeheadposcommand_pre.txt
 ## 5) Create spheres model
 Run this in a shell:
 ```bash
-./create_spheres.sh
+tcsh -x create_spheres.sh
 ```
