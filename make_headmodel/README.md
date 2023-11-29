@@ -1,3 +1,5 @@
+Go to the directory that holds processing scripts for this experiment:
+`cd /auto/iduna/arogojin/bilateral_squeeze_test/code`
 
 ## 1) Copy MRI scans to the following formats: NIfTI, ANFI.
 Run this in a shell:
