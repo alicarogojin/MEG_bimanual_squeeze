@@ -6,6 +6,20 @@
 # When you warp, if you warp it to a 1mm grid, you are needlessly inflating the size of the dataset by a huge factor.
 # So we use an MNI brain in "low resolution" - 5mm, as our reference for specifying the interpolation.
 
+# Set relevant dataset information to be preprocessed
+echo "Enter the participant ID: "
+set subj = "$<"
+
+# If the subject directory in PROC doesn't exist, create it
+if ( -e /auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj} ) then
+   echo "Directory PROC/${subj} exists"
+else
+   mkdir /auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj}
+   echo "Directory PROC/${subj} created"
+endif
+
+set exp_folder = '/auto/iduna/arogojin/bilateral_squeeze_test'
+set workdir = ${exp_folder}/PROC/${subj}
 set anatdir = ${workdir}/anat
 cd $anatdir
 
