@@ -2,7 +2,7 @@
 ## 1) Copy MRI scans to the following formats: NIfTI, ANFI.
 Run this in a shell:
 ```bash
-./3dcopy.sh
+tcsh -x 3dcopy.sh
 ```
 
 ## 2) Mark fiducial points in AFNI
