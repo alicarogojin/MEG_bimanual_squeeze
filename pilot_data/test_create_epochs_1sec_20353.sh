@@ -142,10 +142,10 @@ antiphaseSlow_006.ds \
 antiphaseMedium_006.ds \
 antiphaseFast_006.ds \
 rest_006.ds \
-${exp_folder}/GRAND_DS/${subj}/${subj}_grandDS.ds
+${exp_folder}/GRAND_DS/${subj}/bimanualsqueeze_grandDS.ds
 
 # use scanMarker() to combine each run's condition into a single condition name (e.g. rightSlow_001_1sec ... rightSlow_006_1sec into rightSlow_1sec)
-set grandDs = ${exp_folder}/GRAND_DS/${subj}/${subj}_grandDS.ds
+set grandDs = ${exp_folder}/GRAND_DS/${subj}/bimanualsqueeze_grandDS.ds
 set marker_list = "leftSlow leftMedium leftFast rightSlow rightMedium rightFast inphaseSlow inphaseMedium inphaseFast antiphaseSlow antiphaseMedium antiphaseFast rest"
 
 foreach code (${marker_list})
