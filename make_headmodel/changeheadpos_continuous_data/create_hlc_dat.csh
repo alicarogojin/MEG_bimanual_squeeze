@@ -7,6 +7,8 @@ set subj = "$<"
 set exp_folder = '/auto/iduna/arogojin/bilateral_squeeze_test'
 set workdir = ${exp_folder}/PROC/${subj}
 
+cd ${workdir}
+
 ds2txt \
 -c HLC0011 \
 -c HLC0012 \
