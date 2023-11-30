@@ -59,6 +59,14 @@ else
    echo "Directory GRAND_DS/${subj} created"
 endif
 
+# If the subject directory in PROC doesn't exist, create it
+if ( -e /auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj} ) then
+   echo "Directory PROC/${subj} exists"
+else
+   mkdir /auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj}
+   echo "Directory PROC/${subj} created"
+endif
+
 cd ${workdir}
 
 # add all other runs when they're ready
@@ -151,3 +159,6 @@ set marker_list = "leftSlow leftMedium leftFast rightSlow rightMedium rightFast 
 foreach code (${marker_list})
   scanMarkers -f -includeBad -marker ${code}_001_1sec -marker ${code}_002_1sec -marker ${code}_003_1sec -marker ${code}_004_1sec -marker ${code}_005_1sec -marker ${code}_006_1sec -overlap 0 -time 0 0 -add ${code}_1sec ${grandDs} ${exp_folder}/GRAND_DS/${subj}/${code}_1sec.evt
 end
+
+# copy '${subj}_grandDS.ds' folder to PROC directory
+scp -rv arogojin@172.24.4.37:/auto/iduna/arogojin/bilateral_squeeze_test/GRAND_DS/${subj}/bimanualsqueeze_grandDS.ds/ arogojin@172.24.4.37:/auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj}
