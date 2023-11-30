@@ -21,7 +21,7 @@ ds2txt \
 -c Le \
 -c Re \
 -x \
-${subj}_grandDS.ds  
+bimanualsqueeze_grandDS.ds  
 
     sed '1d' bimanualsqueeze_grandDS.dat > temp.txt
     mv temp.txt bimanualsqueeze_grandDS.dat
