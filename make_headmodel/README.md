@@ -11,6 +11,7 @@ tcsh -x 3dcopy.sh
 There's a video walkthrough for this part on Google Drive.
 
 Now that we've created the mprage file through 3dCopy:
+* from the shell, `cd /auto/iduna/arogojin/bilateral_squeeze_test/PROC/&{subj}/anat`
 * open `afni` (Run in a shell: `afni &`)
 * `EditEnv -> AFNI_LEFT_IS_LEFT` set to `no`
 * define Datamode -> plugins -> edit tagset
