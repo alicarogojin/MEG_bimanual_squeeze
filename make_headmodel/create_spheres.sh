@@ -18,7 +18,7 @@ endif
 set exp_folder = '/auto/iduna/arogojin/bilateral_squeeze_test'
 set workdir = ${exp_folder}/PROC/${subj}
 set mri = ${workdir}/anat
-set ds = ${exp_folder}/GRAND_DS/${subj}/${subj}_grandDS.ds
+set ds = ${exp_folder}/PROC/${subj}/bimanualsqueeze_grandDS.ds
 
 localSpheres -d $ds -s $mri/ortho.shape -M -v > ${ds}/sphereinfo.txt
 checkSpheres $ds >> ${ds}/sphereinfo.txt
