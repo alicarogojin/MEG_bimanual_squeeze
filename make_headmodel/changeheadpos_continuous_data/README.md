@@ -1,5 +1,5 @@
 ## Plan: 
-1) dump hlc channels for each run
+1) dump hlc channels for grandDS
 2) read in hlc data, compute mean
 3) multiply means by 100
 4) construct commands to changeheadpos
