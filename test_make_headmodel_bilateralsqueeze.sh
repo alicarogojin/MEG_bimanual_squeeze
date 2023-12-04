@@ -19,7 +19,7 @@ else
    echo "Directory PROC/${subj} created"
 endif
 
-set exp_folder = '/auto/iduna/arogojin/bilateral_squeeze_test'
+set exp_folder = /auto/iduna/arogojin/bilateral_squeeze_test
 set workdir = ${exp_folder}/PROC/${subj}
 
 mkdir ${workdir}/samresults
