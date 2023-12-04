@@ -14,7 +14,7 @@ set exp_folder = /auto/iduna/arogojin/bilateral_squeeze_test
 set workdir = ${exp_folder}/PROC/${subj}
 
 set window_name = win_allCond_0_0.99
-set targetfilepath = ${workdir}/anat/
+set targetfilepath = ${workdir}/anat
 set targetfilename = targets116
 
 set cov = ${window_name},0-100Hz
