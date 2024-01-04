@@ -2,7 +2,7 @@
 ## Setting up the MEG and Presentation data for analysis ##
 ###########################################################
 
-This is for TESTING new code in /auto/iduna/arogojin/bilateral_squeeze_test
+This is for running code in /auto/iduna/arogojin/bilateral_squeeze_test
 
 ###########################
 #### Presentation data ####
@@ -15,7 +15,9 @@ Two log files are created per participant (unless a run is aborted):
 -- One log file for the practice run at the start of the experiment
 -- One log file for the remaining 6 experimental runs
 
-Use Alisha's python script () to clean up the data and plot the figures for each condition
+Use Alisha's python script (found in Dropbox folder meltzer_lab_docs/other_docs/
+14-49_Bilateral_HandSqueeze_MEG_Alica/presentation_scripts/python_scripts) 
+to clean up the data and plot the figures for each condition
 
 
 #############################################
