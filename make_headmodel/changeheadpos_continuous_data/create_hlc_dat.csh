@@ -4,7 +4,7 @@
 echo "Enter the participant ID: "
 set subj = "$<"
 
-set exp_folder = '/auto/iduna/arogojin/bilateral_squeeze_test'
+set exp_folder = '/rri_disks/eugenia/meltzer_lab/bilateral_squeeze'
 set workdir = ${exp_folder}/PROC/${subj}
 
 cd ${workdir}
