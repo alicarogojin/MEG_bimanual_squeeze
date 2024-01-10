@@ -2,7 +2,7 @@
 ## Setting up the MEG and Presentation data for analysis ##
 ###########################################################
 
-This is for running code in /auto/iduna/arogojin/bilateral_squeeze_test
+This is for running code in /rri_disks/eugenia/meltzer_lab/bilateral_squeeze
 
 ###########################
 #### Presentation data ####
@@ -28,16 +28,16 @@ Below will be a list of different scripts that will be used to preprocess the ME
 
 #### STEP 1: Copy all scripts to main experiment directory in auto/iduna/arogojin/bilateral_squeeze_test
 To copy code from your local computer to the magneto server (auto/iduna/arogojin/bilateral_squeeze_test):
--- "test_transfer_code.sh"
+-- "transfer_code.sh"
 
-	$ scp /Users/connectome/Documents/Postdoc/Baycrest/MEG_bimanual/MEG/iduna_code-test/test_addMarkers.sh arogojin@172.24.4.37:/auto/iduna/arogojin/bilateral_squeeze_test
+	$ scp /Users/connectome/Documents/Postdoc/Baycrest/MEG_bimanual/MEG/iduna_code-test/addMarkers.sh arogojin@172.24.4.37:/rri_disks/eugenia/meltzer_lab/bilateral_squeeze
 	$ enter Baycrest password
 
 #### STEP 2: To then run this script, need to access the magneto server
 
 	$ ssh -Y arogojin@172.24.4.37					## access magneto vm4
-	$ cd /auto/iduna/arogojin/bilateral_squeeze_test			## access Iduna
-	$ tcsh -x test_addMarkers.sh		## runs the code, can replace "test_addMarkers.sh" with any other script
+	$ cd /rri_disks/eugenia/meltzer_lab/bilateral_squeeze			## access Iduna
+	$ tcsh -x addMarkers.sh		## runs the code, can replace "addMarkers.sh" with any other script
 
 
 #########################
@@ -52,7 +52,7 @@ Access Magneto (volume 4 -> 172.24.4.37) through Terminal or MobaXTerm
 	$ ssh -Y arogojin@172.24.4.37
 
 In the terminal or mobaxterm window, copy over the data from the MEG server to our lab server
-	$ scp -r meg@172.24.4.22:/data/meg/[YYYMMDD]/[participant_ID]\* /auto/iduna/arogojin/bilateral_squeeze_test/RAWMEG/[SUBID]
+	$ scp -r meg@172.24.4.22:/data/meg/[YYYMMDD]/[participant_ID]\* /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/RAWMEG/[SUBID]
 	(will be prompted for meg pwd 'meg1lab')
 
 	This should copy over 6 directories (for the 6 runs): 
@@ -66,9 +66,9 @@ In the terminal or mobaxterm window, copy over the data from the MEG server to o
 ################################
 
 #### STEP 1: Add markers to the continuous meg datasets according to the Presentation triggers
--- "test_addMarkers.sh"
+-- "addMarkers.sh"
 *** Special Cases
-test_addMarkers_pilot.sh: for subjects 20284 and 20353, who had an older Presentation script with different
+addMarkers_pilot.sh: for subjects 20284 and 20353, who had an older Presentation script with different
 													portcodes that we then adjusted and fixed for all subsequent participants
 ***
 
@@ -82,15 +82,15 @@ test_addMarkers_pilot.sh: for subjects 20284 and 20353, who had an older Present
 
 
 #### STEP 2: Epoch conditions into 1 second epochs to analyse data as a block design
--- "test_setup_epochs_1sec.sh"
+-- "setup_epochs_1sec.sh"
 *** Special Cases
-test_setup_epochs_1sec_20284.sh: due to slightly different rest periods - after this runs, need to go into
+setup_epochs_1sec_20284.sh: due to slightly different rest periods - after this runs, need to go into
 																the "rest_${run}_epoch_begintimes.evt" files and delete all times except for
-																~197s and ~414s before running "test_setup_epochs_1sec_20284_rest.sh"
-test_setup_epochs_1sec_20284_rest.sh: uses the custom python script to create correct rest epochs
-test_setup_epochs_1sec_20353.sh: due to slightly different rest periods - after this runs, need to go into
+																~197s and ~414s before running "setup_epochs_1sec_20284_rest.sh"
+setup_epochs_1sec_20284_rest.sh: uses the custom python script to create correct rest epochs
+setup_epochs_1sec_20353.sh: due to slightly different rest periods - after this runs, need to go into
 																the "rest_${run}_epoch_begintimes.evt" files and delete all times except for
-																~197s and ~414s before running "test_create_epochs_1sec_20353.sh" in STEP 3
+																~197s and ~414s before running "create_epochs_1sec_20353.sh" in STEP 3
 ***
 
 	Input:
@@ -98,7 +98,7 @@ test_setup_epochs_1sec_20353.sh: due to slightly different rest periods - after 
 	Process:
 		(1) Uses scanMarkers() to find the first existing noTap marker for each condition (marks the start of the
 		movement for every condition)
-		(2) Uses a custom python script ("test_make_epoch_times_1sec.py") to generate a .prn file (text files
+		(2) Uses a custom python script ("make_epoch_times_1sec.py") to generate a .prn file (text files
 		used for specifying marker times to addMarker()) specifying the onset times for the intended 1 second epochs
 		(3) Uses addMarker() to add the new 1 second markers based on the .prn file
 	Output:
@@ -106,10 +106,10 @@ test_setup_epochs_1sec_20353.sh: due to slightly different rest periods - after 
 
 
 #### STEP 3: Epoch the data based on the new 1 second markers & combine all 6 runs
--- "test_create_epochs_1sec.sh"
+-- "create_epochs_1sec.sh"
 *** Special Cases
-test_create_epochs_1sec_20284.sh: due to slightly different rest periods and needing to choose only runs 2, 3, 5, and 6
-test_create_epochs_1sec_20353.sh: essentially the same as for subsequent participants after fixing the .evt in STEP 2,
+create_epochs_1sec_20284.sh: due to slightly different rest periods and needing to choose only runs 2, 3, 5, and 6
+create_epochs_1sec_20353.sh: essentially the same as for subsequent participants after fixing the .evt in STEP 2,
 																	but processed separately anyway as they were a pilot subject
 ***
 
@@ -163,4 +163,4 @@ do some work in Step 2 before it can run the rest ***
 
 
 #### STEP 5: Make the MRI head model
--- "test_doSAM_bilateralsqueeze_beta_ERD.sh"
+-- "doSAM_bilateralsqueeze_beta_ERD.sh"
