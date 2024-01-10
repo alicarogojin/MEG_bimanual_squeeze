@@ -8,7 +8,7 @@ set date = 20230718 # YYYYMMDD
 #### Left, right, and inphase conditions
 foreach run (001 002 003 004 005 006)
     set dataset = ${subj}_AEF01_${date}_${run}.ds
-    set work_dir = /auto/iduna/arogojin/bilateral_squeeze_test/MARKERS_ADDED/${subj}
+    set work_dir = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MARKERS_ADDED/${subj}
 
     cd $work_dir
 
@@ -31,7 +31,7 @@ foreach run (001 002 003 004 005 006)
 		foreach option ($options)
 				set input_file = "${option}_${run}_epoch_begintimes.evt"
 				set output_file = "${option}_${run}_1sec_times.prn"
-				python /auto/iduna/arogojin/bilateral_squeeze_test/code/test_make_epoch_times_1sec.py "$input_file" "$output_file"
+				python /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/test_make_epoch_times_1sec.py "$input_file" "$output_file"
 
         # addMarkers based based on the .prn files
         addMarker -f -n ${option}_${run}_1sec -p "$output_file" ${dataset}
@@ -41,7 +41,7 @@ end
 #### Antiphase conditions
 foreach run (001 002 003 004 005 006)
     set dataset = ${subj}_AEF01_${date}_${run}.ds
-    set work_dir = /auto/iduna/arogojin/bilateral_squeeze_test/MARKERS_ADDED/${subj}
+    set work_dir = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MARKERS_ADDED/${subj}
 
     cd $work_dir
 
@@ -80,7 +80,7 @@ foreach run (001 002 003 004 005 006)
     foreach option ($options)
         set input_file = "${option}_${run}_epoch_begintimes.evt"
         set output_file = "${option}_${run}_1sec_times.prn"
-        python /auto/iduna/arogojin/bilateral_squeeze_test/code/test_make_epoch_times_1sec.py "$input_file" "$output_file"
+        python /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/test_make_epoch_times_1sec.py "$input_file" "$output_file"
 
         # addMarkers based based on the .prn files
         addMarker -f -n ${option}_${run}_1sec -p "$output_file" ${dataset}
@@ -90,7 +90,7 @@ end
 #### Rest conditions
 foreach run (001 002 003 005 006)
   set dataset = ${subj}_AEF01_${date}_${run}.ds
-  set work_dir = /auto/iduna/arogojin/bilateral_squeeze_test/MARKERS_ADDED/${subj}
+  set work_dir = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MARKERS_ADDED/${subj}
   cd $work_dir
 
   # Iterate through the event marker codes and generate event markers
@@ -99,7 +99,7 @@ end
 
 foreach run (004)
   set dataset = ${subj}_AEF01_${date}_${run}.ds
-  set work_dir = /auto/iduna/arogojin/bilateral_squeeze_test/MARKERS_ADDED/${subj}
+  set work_dir = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MARKERS_ADDED/${subj}
   cd $work_dir
 
   # Iterate through the event marker codes and generate event markers
@@ -107,4 +107,4 @@ foreach run (004)
 end
 
 ## then need to go in and manually delete all times except for ~171s and ~460s for the rest_${run}_epoch_begintimes.evt files
-## then proceed to run "test_run_batch_epoch_20284_rest.sh"
+## then proceed to run "run_batch_epoch_20284_rest.sh"
