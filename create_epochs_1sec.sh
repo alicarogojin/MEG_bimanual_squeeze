@@ -8,14 +8,14 @@ echo "Enter the date-string in YYYYMMDD: "
 set date = "$<" # YYYYMMDD
 
 # If the subject directory in EPOCHED doesn't exist, create it
-if ( -e /auto/iduna/arogojin/bilateral_squeeze_test/EPOCHED/${subj} ) then
+if ( -e /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/EPOCHED/${subj} ) then
    echo "Directory EPOCHED/${subj} exists"
 else
-   mkdir /auto/iduna/arogojin/bilateral_squeeze_test/EPOCHED/${subj}
+   mkdir /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/EPOCHED/${subj}
    echo "Directory EPOCHED/${subj} created"
 endif
 
-set exp_folder = /auto/iduna/arogojin/bilateral_squeeze_test
+set exp_folder = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze
 set workdir = ${exp_folder}/EPOCHED/${subj}
 
 # Epoch raw dataset based on the new 1-second markers added with test_run_batch_epoch.sh
@@ -39,7 +39,7 @@ foreach run (001 002 003 004 005 006)
     $tmpDS
 
     # baseline correction
-    set filter_config = '/auto/iduna/arogojin/bilateral_squeeze_test/code/baseline_corr_bilateralsqueeze.cfg'
+    set filter_config = '/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/baseline_corr_bilateralsqueeze.cfg'
     newDs -f -all \
     -filter ${filter_config} \
     -includeBadChannels \
@@ -55,10 +55,10 @@ end
 # Combine all 6 epoched datasets into single, marker-specific datasets
 
 # If the subject directory in GRAND_DS doesn't exist, create it
-if ( -e /auto/iduna/arogojin/bilateral_squeeze_test/GRAND_DS/${subj} ) then
+if ( -e /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/GRAND_DS/${subj} ) then
    echo "Directory GRAND_DS/${subj} exists"
 else
-   mkdir /auto/iduna/arogojin/bilateral_squeeze_test/GRAND_DS/${subj}
+   mkdir /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/GRAND_DS/${subj}
    echo "Directory GRAND_DS/${subj} created"
 endif
 
@@ -156,4 +156,4 @@ foreach code (${marker_list})
 end
 
 # copy '${subj}_grandDS.ds' folder to PROC directory
-scp -rv arogojin@172.24.4.37:/auto/iduna/arogojin/bilateral_squeeze_test/GRAND_DS/${subj}/bimanualsqueeze_grandDS.ds/ arogojin@172.24.4.37:/auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj}
+scp -rv arogojin@172.24.4.37:/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/GRAND_DS/${subj}/bimanualsqueeze_grandDS.ds/ arogojin@172.24.4.37:/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/PROC/${subj}
