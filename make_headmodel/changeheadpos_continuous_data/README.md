@@ -16,7 +16,7 @@ Output will look something like this (all head motion is <0.5mm, which is good):
 
 ![Alt text](https://github.com/alicarogojin/MEG_bimanual_squeeze/assets/45542215/a0851992-a266-4cdb-b8e5-422d53699e17)
 
-## 2) Genearate commands to compensate for head movement
+## 2) Generate commands to compensate for head movement
 First, run this python[^python_run] script: `generate_headposcommands.py`
 
 [^python_run]: e.g. by `python3 my_script_name.py` in a shell
