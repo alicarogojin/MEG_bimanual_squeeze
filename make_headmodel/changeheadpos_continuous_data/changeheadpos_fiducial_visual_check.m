@@ -5,7 +5,7 @@ clear all
 subj = input('Enter the value for subj: ', 's');
 
 % Construct the data directory path based on user input
-data_dir = ['/auto/iduna/arogojin/bilateral_squeeze_test/PROC/' subj '/'];
+data_dir = ['/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/PROC/' subj '/'];
 
 % Load motion data from the file 'bimanualsqueeze_grandDS.dat' in the specified directory
 mot = dlmread(strcat(data_dir, 'bimanualsqueeze_grandDS.dat'),' ');
