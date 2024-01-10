@@ -107,4 +107,4 @@ foreach run (004)
 end
 
 ## then need to go in and manually delete all times except for ~171s and ~460s for the rest_${run}_epoch_begintimes.evt files
-## then proceed to run "run_batch_epoch_20284_rest.sh"
+## then proceed to run "create_epochs_1sec_20284_rest.sh"
