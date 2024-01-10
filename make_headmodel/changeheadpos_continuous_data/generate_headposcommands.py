@@ -15,7 +15,7 @@ subj = input("Enter the value for subj: ")
 outlines = []
 
 # Construct the data directory path based on user input
-data_dir = '/auto/iduna/arogojin/bilateral_squeeze_test/PROC/' + subj + '/'
+data_dir = '/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/PROC/' + subj + '/'
 
 # Specify the input file path
 infilename = data_dir + 'bimanualsqueeze_grandDS.dat'
