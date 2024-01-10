@@ -1,5 +1,5 @@
 #!/bin/tcsh
-##### Epoch data into custom 1-second epochs using custom python script test_make_epoch_times_1sec.py
+##### Epoch data into custom 1-second epochs using custom python script make_epoch_times_1sec.py
 
 # Set relevant dataset information to be preprocessed
 set subj = 20284
@@ -11,7 +11,7 @@ foreach run (001 002 003 004 005 006)
   set work_dir = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MARKERS_ADDED/${subj}
 
   cd $work_dir
-  # Call custom test_make_epoch_times_1sec Python script
+  # Call custom make_epoch_times_1sec Python script
   # This script will generate a custom .prn file specifying the onset times for the intended 1 second epochs
   set input_file = "rest_${run}_epoch_begintimes.evt"
   set output_file = "rest_${run}_1sec_times.prn"
