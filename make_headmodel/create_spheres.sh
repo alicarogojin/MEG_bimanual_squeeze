@@ -8,14 +8,14 @@ echo "Enter the participant ID: "
 set subj = "$<"
 
 # If the subject directory in PROC doesn't exist, create it
-if ( -e /auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj} ) then
+if ( -e /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/PROC/${subj} ) then
    echo "Directory PROC/${subj} exists"
 else
-   mkdir /auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj}
+   mkdir /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/PROC/${subj}
    echo "Directory PROC/${subj} created"
 endif
 
-set exp_folder = '/auto/iduna/arogojin/bilateral_squeeze_test'
+set exp_folder = '/rri_disks/eugenia/meltzer_lab/bilateral_squeeze'
 set workdir = ${exp_folder}/PROC/${subj}
 set mri = ${workdir}/anat
 set ds = ${exp_folder}/PROC/${subj}/bimanualsqueeze_grandDS.ds
@@ -29,5 +29,5 @@ head ${ds}/sphereinfo.txt
 tail ${ds}/sphereinfo.txt
 
 # Copy everything over to the ${exp_folder}/MRI directory to have as a backup
-scp -r ${workdir}/anat /auto/iduna/arogojin/bilateral_squeeze_test/MRI/${subj}
-scp -r ${workdir}/samresults /auto/iduna/arogojin/bilateral_squeeze_test/MRI/${subj}
+scp -r ${workdir}/anat /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MRI/${subj}
+scp -r ${workdir}/samresults /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MRI/${subj}
