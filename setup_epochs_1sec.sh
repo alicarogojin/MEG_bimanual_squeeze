@@ -1,5 +1,5 @@
 #!/bin/tcsh
-##### Epoch data into custom 1-second epochs using custom python script test_make_epoch_times_1sec.py
+##### Epoch data into custom 1-second epochs using custom python script make_epoch_times_1sec.py
 
 # Set relevant dataset information to be preprocessed
 echo "Enter the participant ID: "
@@ -29,12 +29,12 @@ foreach run (001 002 003 004 005 006)
 
 		set options = ("leftSlow" "leftMedium" "leftFast" "rightSlow" "rightMedium" "rightFast" "inphaseSlow" "inphaseMedium" "inphaseFast")
 
-		# Iterate through the options and call custom test_make_epoch_times_1sec Python script
+		# Iterate through the options and call custom make_epoch_times_1sec Python script
 		# This script will generate a custom .prn file specifying the onset times for the intended 1 second epochs
 		foreach option ($options)
 				set input_file = "${option}_${run}_epoch_begintimes.evt"
 				set output_file = "${option}_${run}_1sec_times.prn"
-				python /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/test_make_epoch_times_1sec.py "$input_file" "$output_file"
+				python /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/make_epoch_times_1sec.py "$input_file" "$output_file"
 
         # addMarkers based based on the .prn files
         addMarker -f -n ${option}_${run}_1sec -p "$output_file" ${dataset}
@@ -83,7 +83,7 @@ foreach run (001 002 003 004 005 006)
     foreach option ($options)
         set input_file = "${option}_${run}_epoch_begintimes.evt"
         set output_file = "${option}_${run}_1sec_times.prn"
-        python /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/test_make_epoch_times_1sec.py "$input_file" "$output_file"
+        python /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/make_epoch_times_1sec.py "$input_file" "$output_file"
 
         # addMarkers based based on the .prn files
         addMarker -f -n ${option}_${run}_1sec -p "$output_file" ${dataset}
@@ -99,11 +99,11 @@ foreach run (001 002 003 004 005 006)
   # Iterate through the event marker codes and generate event markers
   scanMarkers -f -includeBad -marker t163_rest -overlap 0 -time 0 0 -excludeEvent1 t163_rest -2.1 -0.1 -add rest_${run}_begin ${dataset} rest_${run}_epoch_begintimes.evt
 
-  # Call custom test_make_epoch_times_1sec Python script
+  # Call custom make_epoch_times_1sec Python script
   # This script will generate a custom .prn file specifying the onset times for the intended 1 second epochs
   set input_file = "rest_${run}_epoch_begintimes.evt"
   set output_file = "rest_${run}_1sec_times.prn"
-  python /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/test_make_epoch_times_1sec.py "$input_file" "$output_file"
+  python /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/make_epoch_times_1sec.py "$input_file" "$output_file"
 
   # addMarkers based based on the .prn files
   addMarker -f -n rest_${run}_1sec -p "$output_file" ${dataset}
