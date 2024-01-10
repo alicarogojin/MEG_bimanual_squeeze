@@ -135,32 +135,9 @@ create_epochs_1sec_20353.sh: essentially the same as for subsequent participants
 		Mark fiducial points in the .mprage or .nii file in AFNI according to the screenshots.
 		Fiducial points were only marked for aligning the MRI to MEG head space (orthogonal: forward tilting).
 
--- "make_headmodel_bilateralsqueeze.sh"
-*** Copy each line separately into Terminal/MobaXTerm, it does not run as a script on its own since you have to
-do some work in Step 2 before it can run the rest ***
-
-	Input:
-		The structural MRI scan in .nii format copied from XNAT.
-	Process:
-		(1) Align structural MRI with fiducials with the MEG CTF space (forward tilt)
-		(2) Strip skull
-		(3) Build 3D brain hull
-		(4) Wrap dataset to MNI space with ANTS transformation and Multisphere transform
-		(5) Inverse wrap from the MNI space to individual brains to get the 116 atlas brain regions
-		(6) *** Run "changeheadpos_continuous_data" ***
-		(7) Use Multisphere to make head model for MEG source localization
-	Dependencies:
-		-- "changeheadpos_continuous_data":
-		This script does a sanity check of the continuous head location in the MEG dataset.
-		If all looks good, average over all head positions.
-		Input:
-			.ds MEG dataset for each run
-		Process:
-			(1) Plot in Matlab the head movement across each run.
-			(2) Average across the whole run as the head location for the run.
-	Output:
-			bilateral_squeeze_test/beginMatch.ds with head position corrected to the average of the continuous head position
-
+-- go into "make_headmodel" directory and follow instructions in the README.md document
+Briefly,
+1) Run "3dcopy.sh"
 
 #### STEP 5: Make the MRI head model
 -- "doSAM_bilateralsqueeze_beta_ERD.sh"
