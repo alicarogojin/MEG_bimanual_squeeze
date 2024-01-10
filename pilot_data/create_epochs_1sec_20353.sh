@@ -15,7 +15,7 @@ endif
 set exp_folder = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze
 set workdir = ${exp_folder}/EPOCHED/${subj}
 
-# Epoch raw dataset based on the new 1-second markers added with run_batch_epoch.sh
+# Epoch raw dataset based on the new 1-second markers added with setup_epochs_1sec.sh
 foreach run (001 002 003 004 005 006)
   set dataset = ${subj}_AEF01_${date}_${run}.ds
 
