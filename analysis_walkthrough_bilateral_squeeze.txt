@@ -135,12 +135,15 @@ create_epochs_1sec_20353.sh: essentially the same as for subsequent participants
 		Mark fiducial points in the .mprage or .nii file in AFNI according to the screenshots.
 		Fiducial points were only marked for aligning the MRI to MEG head space (orthogonal: forward tilting).
 
--- go into "make_headmodel" directory and follow instructions in the README.md document
+-- go into "/make_headmodel" directory and follow instructions in the README.md document
 Briefly,
 1) Run "3dcopy.sh"
 2) Mark fiducials in AFNI
 3) Run "create_brainhull.sh"
 4) Run "warp_anat.sh"
+5) Run contents of "/changeheadpos_continuous_data" directory
+6) Run "create_spheres.sh"
 
-#### STEP 5: Make the MRI head model
+
+#### STEP 5: 
 -- "doSAM_bilateralsqueeze_beta_ERD.sh"
