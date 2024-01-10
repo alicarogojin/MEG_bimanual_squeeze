@@ -138,6 +138,9 @@ create_epochs_1sec_20353.sh: essentially the same as for subsequent participants
 -- go into "make_headmodel" directory and follow instructions in the README.md document
 Briefly,
 1) Run "3dcopy.sh"
+2) Mark fiducials in AFNI
+3) Run "create_brainhull.sh"
+4) Run "warp_anat.sh"
 
 #### STEP 5: Make the MRI head model
 -- "doSAM_bilateralsqueeze_beta_ERD.sh"
