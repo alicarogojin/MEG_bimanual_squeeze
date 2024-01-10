@@ -46,20 +46,17 @@ To copy code from your local computer to the magneto server (auto/iduna/arogojin
 
 MEG data needs to be copied from the meg server to one of our local rri_disks for analysis
 
-Create a raw data folder for the experiment (can do this in FileZilla)
--- auto/iduna/arogojin/bilateral_squeeze_test
+Access Magneto (volume 4 -> 172.24.4.37) through Terminal or MobaXTerm 
+	$ ssh -Y arogojin@172.24.4.37
 
-#### Run the data transfer batch script
--- "test_transfer_MEG_data.sh"
+In the terminal or mobaxterm window, copy over the data from the MEG server to our lab server
+	$ scp -r meg@172.24.4.22:/data/meg/[YYYMMDD]/[participant_ID]\* /auto/iduna/arogojin/bilateral_squeeze_test/RAWMEG/[SUBID]
+	(will be prompted for meg pwd 'meg1lab')
 
-	Input:
-		Will ask for participant ID, date of MEG, and runs (001, 002, 003...)
-	Process:
-		This will copy over over 6 directories (for the 6 runs): [participant_ID]_AEF01_[YYYYMMDD]_*
-		(* = 001.ds, 002.ds, 003.ds, 004.ds, 005.ds, 006.ds) from the MEG server (meg@172.24.4.22)
-		to auto/iduna/arogojin/bilateral_squeeze_test into the RAWMEG folder.
-	Output:
-		.ds files in the RAWMEG/[YYYYMMDD] folder
+	This should copy over 6 directories (for the 6 runs): 
+	[participant_ID]_AEF01_[YYYYMMDD]_* (* = 001.ds, 002.ds, 003.ds, 004.ds, 005.ds, 006.ds)
+
+.ds files will be in the RAWMEG/[SUBID] folder
 
 
 ################################
