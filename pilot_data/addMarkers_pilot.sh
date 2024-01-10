@@ -13,7 +13,7 @@ set subj = "$<"
 echo "Enter the date-string in YYYYMMDD: "
 set date = "$<" # YYYYMMDD
 
-set exp_folder = /auto/iduna/arogojin/bilateral_squeeze_test
+set exp_folder = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze
 
 # Define relative paths to the required directories for the data pipeline, make these directories if they don't exist already
 if ( -e ${exp_folder}/MARKERS_ADDED/${subj} ) then
