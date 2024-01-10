@@ -7,14 +7,14 @@ echo "Enter the participant ID: "
 set subj = "$<"
 
 # If the subject directory in PROC doesn't exist, create it
-if ( -e /auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj} ) then
+if ( -e /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/PROC/${subj} ) then
    echo "Directory PROC/${subj} exists"
 else
-   mkdir /auto/iduna/arogojin/bilateral_squeeze_test/PROC/${subj}
+   mkdir /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/PROC/${subj}
    echo "Directory PROC/${subj} created"
 endif
 
-set exp_folder = '/auto/iduna/arogojin/bilateral_squeeze_test'
+set exp_folder = '/rri_disks/eugenia/meltzer_lab/bilateral_squeeze'
 set workdir = ${exp_folder}/PROC/${subj}
 
 mkdir ${workdir}/samresults
