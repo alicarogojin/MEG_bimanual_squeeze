@@ -44,7 +44,9 @@ To copy code from your local computer to the magneto server (auto/iduna/arogojin
 #### MEG data access ####
 #########################
 
-MEG data needs to be copied from the meg server to one of our local rri_disks for analysis
+MEG data needs to be copied from the meg server to one of our local rri_disks for analysis.
+Need to make sure that the /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/RAWMEG folder has a corresponding
+participant ID folder under it (i.e., /RAWMEG/[SUBID])
 
 Access Magneto (volume 4 -> 172.24.4.37) through Terminal or MobaXTerm 
 	$ ssh -Y arogojin@172.24.4.37
