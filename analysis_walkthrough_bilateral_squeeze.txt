@@ -13,9 +13,9 @@ Need to copy the log files for each participant onto a USB
 
 Two log files are created per participant (unless a run is aborted):
 -- One log file for the practice run at the start of the experiment
--- One log file for the remaining 6 experimental runs
+-- One log file for each of the remaining 6 experimental runs
 
-Use Alisha's python script (found in Dropbox folder meltzer_lab_docs/other_docs/
+Use the python script (found in Dropbox folder meltzer_lab_docs/other_docs/
 14-49_Bilateral_HandSqueeze_MEG_Alica/presentation_scripts/python_scripts) 
 to clean up the data and plot the figures for each condition
 
