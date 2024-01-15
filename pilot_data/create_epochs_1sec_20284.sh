@@ -35,7 +35,7 @@ foreach run (001 002 003 004 005 006)
     $tmpDS
 
     # baseline correction
-    set filter_config = '/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/baseline_corr_bilateralsqueeze.cfg'
+    set filter_config = '/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/baseline_corr_bilateralsqueeze.cfg'
     newDs -f -all \
     -filter ${filter_config} \
     -includeBadChannels \
