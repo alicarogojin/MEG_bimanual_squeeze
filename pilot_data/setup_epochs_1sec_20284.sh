@@ -106,5 +106,5 @@ foreach run (004)
   scanMarkers -f -includeBad -marker t133_rest -overlap 0 -time 0 0 -excludeEvent1 t133_rest -2.1 -0.1 -add rest_${run}_begin ${dataset} rest_${run}_epoch_begintimes.evt
 end
 
-## then need to go in and manually delete all times except for ~171s and ~460s for the rest_${run}_epoch_begintimes.evt files
+## then need to go in and manually delete all times except for ~77s and ~174s for the rest_${run}_epoch_begintimes.evt files
 ## then proceed to run "create_epochs_1sec_20284_rest.sh"
