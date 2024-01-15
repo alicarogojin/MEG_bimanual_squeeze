@@ -18,41 +18,7 @@ set workdir = "${exp_folder}/EPOCHED/${subj}"
 foreach run (001 002 003 004 005 006)
   set dataset = ${subj}_AEF01_${date}_${run}.ds
 
-  set marker_list = "leftSlow leftMedium leftFast rightSlow rightMedium rightFast inphaseSlow inphaseMedium inphaseFast antiphaseSlow antiphaseMedium antiphaseFast"
-  foreach code (${marker_list})
-
-    set inDS = ${exp_folder}/MARKERS_ADDED/${subj}/${dataset}
-    set tmpDS = ${workdir}/temp_${code}_${run}.ds
-    set outDS = ${workdir}/${code}_${run}.ds
-
-    newDs -f -all \
-    -marker ${code}_${run}_1sec \
-    -time 0 1 \
-    -overlap 0 \
-    -includeBadChannels \
-    -includeBad \
-    $inDS \
-    $tmpDS
-
-    # baseline correction
-    set filter_config = '/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/code/baseline_corr_bilateralsqueeze.cfg'
-    newDs -f -all \
-    -filter ${filter_config} \
-    -includeBadChannels \
-    -includeBad \
-    $tmpDS \
-    $outDS
-
-    # Now that the data are baseline-corrected and epoched, remove the temporary dataset
-    rm -r $tmpDS
-  end
-end
-
-# Repeat for the rest data
-foreach run (002 003 005 006)
-  set dataset = ${subj}_AEF01_${date}_${run}.ds
-
-  set marker_list = "rest"
+  set marker_list = "leftSlow leftMedium leftFast rightSlow rightMedium rightFast inphaseSlow inphaseMedium inphaseFast antiphaseSlow antiphaseMedium antiphaseFast rest"
   foreach code (${marker_list})
 
     set inDS = ${exp_folder}/MARKERS_ADDED/${subj}/${dataset}
@@ -109,6 +75,7 @@ inphaseFast_001.ds \
 antiphaseSlow_001.ds \
 antiphaseMedium_001.ds \
 antiphaseFast_001.ds \
+rest_001.ds \
 leftSlow_002.ds \
 leftMedium_002.ds \
 leftFast_002.ds \
@@ -147,6 +114,7 @@ inphaseFast_004.ds \
 antiphaseSlow_004.ds \
 antiphaseMedium_004.ds \
 antiphaseFast_004.ds \
+rest_004.ds \
 leftSlow_005.ds \
 leftMedium_005.ds \
 leftFast_005.ds \
@@ -177,11 +145,8 @@ ${exp_folder}/GRAND_DS/${subj}/${subj}_grandDS.ds
 
 # use scanMarker() to combine each run's condition into a single condition name (e.g. rightSlow_001_1sec ... rightSlow_006_1sec into rightSlow_1sec)
 set grandDs = ${exp_folder}/GRAND_DS/${subj}/${subj}_grandDS.ds
-set marker_list = "leftSlow leftMedium leftFast rightSlow rightMedium rightFast inphaseSlow inphaseMedium inphaseFast antiphaseSlow antiphaseMedium antiphaseFast"
+set marker_list = "leftSlow leftMedium leftFast rightSlow rightMedium rightFast inphaseSlow inphaseMedium inphaseFast antiphaseSlow antiphaseMedium antiphaseFast rest"
 
 foreach code (${marker_list})
   scanMarkers -f -includeBad -marker ${code}_001_1sec -marker ${code}_002_1sec -marker ${code}_003_1sec -marker ${code}_004_1sec -marker ${code}_005_1sec -marker ${code}_006_1sec -overlap 0 -time 0 0 -add ${code}_1sec ${grandDs} ${exp_folder}/GRAND_DS/${subj}/${code}_1sec.evt
 end
-
-# repeat for rest data
-scanMarkers -f -includeBad -marker rest_002_1sec -marker rest_003_1sec -marker rest_005_1sec -marker rest_006_1sec -overlap 0 -time 0 0 -add rest_1sec ${grandDs} ${exp_folder}/GRAND_DS/${subj}/rest_1sec.evt
