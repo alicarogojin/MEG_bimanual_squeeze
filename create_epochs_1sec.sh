@@ -156,4 +156,4 @@ foreach code (${marker_list})
 end
 
 # copy '${subj}_grandDS.ds' folder to PROC directory
-scp -rv arogojin@172.24.4.37:/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/GRAND_DS/${subj}/bimanualsqueeze_grandDS.ds/ arogojin@172.24.4.37:/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/PROC/${subj}
+scp -rv /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/GRAND_DS/${subj}/bimanualsqueeze_grandDS.ds/ /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/PROC/${subj}
