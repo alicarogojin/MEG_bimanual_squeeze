@@ -141,12 +141,15 @@ antiphaseSlow_006.ds \
 antiphaseMedium_006.ds \
 antiphaseFast_006.ds \
 rest_006.ds \
-${exp_folder}/GRAND_DS/${subj}/${subj}_grandDS.ds
+${exp_folder}/GRAND_DS/${subj}/bimanualsqueeze_grandDS.ds
 
 # use scanMarker() to combine each run's condition into a single condition name (e.g. rightSlow_001_1sec ... rightSlow_006_1sec into rightSlow_1sec)
-set grandDs = ${exp_folder}/GRAND_DS/${subj}/${subj}_grandDS.ds
+set grandDs = ${exp_folder}/GRAND_DS/${subj}/bimanualsqueeze_grandDS.ds
 set marker_list = "leftSlow leftMedium leftFast rightSlow rightMedium rightFast inphaseSlow inphaseMedium inphaseFast antiphaseSlow antiphaseMedium antiphaseFast rest"
 
 foreach code (${marker_list})
   scanMarkers -f -includeBad -marker ${code}_001_1sec -marker ${code}_002_1sec -marker ${code}_003_1sec -marker ${code}_004_1sec -marker ${code}_005_1sec -marker ${code}_006_1sec -overlap 0 -time 0 0 -add ${code}_1sec ${grandDs} ${exp_folder}/GRAND_DS/${subj}/${code}_1sec.evt
 end
+
+# copy '${subj}_grandDS.ds' folder to PROC directory
+scp -rv arogojin@172.24.4.37:/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/GRAND_DS/${subj}/bimanualsqueeze_grandDS.ds/ arogojin@172.24.4.37:/rri_disks/eugenia/meltzer_lab/bilateral_squeeze/PROC/${subj}
