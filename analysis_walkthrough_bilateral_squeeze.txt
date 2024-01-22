@@ -11,7 +11,7 @@ This is for running code in /rri_disks/eugenia/meltzer_lab/bilateral_squeeze
 Presentation data (log files) are stored locally on Ringneck (in the MEG lab)
 Need to copy the log files for each participant onto a USB
 
-Two log files are created per participant (unless a run is aborted):
+7 log files are created per participant (unless a run is aborted):
 -- One log file for the practice run at the start of the experiment
 -- One log file for each of the remaining 6 experimental runs
 
@@ -26,17 +26,16 @@ to clean up the data and plot the figures for each condition
 
 Below will be a list of different scripts that will be used to preprocess the MEG data
 
-#### STEP 1: Copy all scripts to main experiment directory in auto/iduna/arogojin/bilateral_squeeze_test
-To copy code from your local computer to the magneto server (auto/iduna/arogojin/bilateral_squeeze_test):
--- "transfer_code.sh"
+#### STEP 1: Copy all scripts to main experiment directory in /rri_disks/eugenia/meltzer_lab/bilateral_squeeze
+To copy code from your local computer to the magneto server (/rri_disks/eugenia/meltzer_lab/bilateral_squeeze):
 
-	$ scp /Users/connectome/Documents/Postdoc/Baycrest/MEG_bimanual/MEG/iduna_code-test/addMarkers.sh arogojin@172.24.4.37:/rri_disks/eugenia/meltzer_lab/bilateral_squeeze
+	$ scp /Users/connectome/Documents/Postdoc/Baycrest/MEG_bimanual/MEG/code/addMarkers.sh arogojin@172.24.4.37:/rri_disks/eugenia/meltzer_lab/bilateral_squeeze
 	$ enter Baycrest password
 
 #### STEP 2: To then run this script, need to access the magneto server
 
-	$ ssh -Y arogojin@172.24.4.37					## access magneto vm4
-	$ cd /rri_disks/eugenia/meltzer_lab/bilateral_squeeze			## access Iduna
+	$ ssh -Y arogojin@172.24.4.37					## access magneto volume 4
+	$ cd /rri_disks/eugenia/meltzer_lab/bilateral_squeeze			## access Eugenia
 	$ tcsh -x addMarkers.sh		## runs the code, can replace "addMarkers.sh" with any other script
 
 
@@ -45,21 +44,33 @@ To copy code from your local computer to the magneto server (auto/iduna/arogojin
 #########################
 
 MEG data needs to be copied from the meg server to one of our local rri_disks for analysis.
+
+#### STEP 1: Copy to RAWMEG directory
 Need to make sure that the /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/RAWMEG folder has a corresponding
 participant ID folder under it (i.e., /RAWMEG/[SUBID])
 
 Access Magneto (volume 4 -> 172.24.4.37) through Terminal or MobaXTerm 
-	$ ssh -Y arogojin@172.24.4.37
+	$ ssh -Y arogojin@172.24.4.37  # replace arogojin with your username
+	$ enter Baycrest password
 
 In the terminal or mobaxterm window, copy over the data from the MEG server to our lab server
 	$ scp -r meg@172.24.4.22:/data/meg/[YYYMMDD]/[participant_ID]\* /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/RAWMEG/[SUBID]
 	(will be prompted for meg pwd 'meg1lab')
 
 	This should copy over 6 directories (for the 6 runs): 
-	[participant_ID]_AEF01_[YYYYMMDD]_* (* = 001.ds, 002.ds, 003.ds, 004.ds, 005.ds, 006.ds)
+	[participant_ID]_AEF01_[YYYYMMDD]_* (* means it copies over all files 001.ds, 002.ds, 003.ds, 004.ds, 005.ds, 006.ds)
 
 .ds files will be in the RAWMEG/[SUBID] folder
 
+#### STEP 2: Copy to MARKERS_ADDED directory
+The step above is to always have an untouched version of the raw MEG data just in case. 
+For the actual analysis below, we will be working from raw MEG data copied over to the MARKERS_ADDED directory. 
+Copy the raw MEG files from RAWMEG to the MARKERS_ADDED directory:
+
+	$ ssh -Y arogojin@172.24.4.37  # replace arogojin with your username
+	$ enter Baycrest password
+	$ scp -r meg@172.24.4.22:/data/meg/[YYYMMDD]/[participant_ID]\* /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MARKERS_ADDED/[SUBID]
+	(will be prompted for meg pwd 'meg1lab')
 
 ################################
 #### MEG data preprocessing ####
