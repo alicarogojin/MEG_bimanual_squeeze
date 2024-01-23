@@ -21,7 +21,7 @@ mkdir ${workdir}/samresults
 mkdir ${workdir}/anat
 
 cd ${workdir}/anat
-3dcopy /rri_disks/eugenia/meltzer_lab/mridata2023/proc/${subj}/5_anat-T1w_anat-T1w.nii ./${subj}_mprage.nii
+3dcopy /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MRI/${subj}/5_anat-T1w_anat-T1w.nii ./${subj}_mprage.nii
 
 # Convert to mprage format
 3dcopy ${subj}_mprage.nii mprage+orig
