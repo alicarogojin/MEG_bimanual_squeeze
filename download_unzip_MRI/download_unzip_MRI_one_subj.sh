@@ -62,11 +62,13 @@ set XnatUrlProject = "https://rrinid.rotman-baycrest.on.ca/spred/data/projects"
 #----------------------------------------
 # STEP ONE - DOWNLOAD THE MRI SCANS
 #----------------------------------------
-# 
 
-set MriStorageDir = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze
+set MriStorageDir = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MRI/${SubjectID}
+echo $MriStorageDir
+mkdir $MriStorageDir
+
 # create directory to download to 
-set DownloadDir = ${MriStorageDir}/MRI/${SubjectID}/raw/
+set DownloadDir = ${MriStorageDir}/raw/
 echo $DownloadDir
 mkdir $DownloadDir
 cd $DownloadDir
@@ -113,9 +115,6 @@ unzip ${MriDirName}
 
 set RawDirRoot = ${MriStorageDir}/MRI/${SubjectID}/raw/${MriDirName}/scans
 
-set ProcDir = ${MriStorageDir}/MRI/${SubjectID}/
-
-mkdir $ProcDir
 cd $RawDirRoot
 
 ##### IMPORTANT STEP - CHECK SCAN NAMES #####
@@ -128,13 +127,13 @@ ls $RawDirRoot
 # /rri_disks/artemis/meltzer_lab/ffaisal/MRI/XNAT_data/
 echo "##################################################################"
 echo "Starting DICOM to Nii conversion"
-# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${ProcDir} ./1-anat_scout/resources/DICOM/files
-# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${ProcDir} ./2-anat_scout_MPR_sag/resources/DICOM/files
-# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${ProcDir} ./3-anat_scout_MPR_cor/resources/DICOM/files
-# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${ProcDir} ./4-anat_scout_MPR_tra/resources/DICOM/files
-dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${ProcDir} ./5-anat_T1w/resources/DICOM/files
-# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${ProcDir} ./6-anat_T1w_MPR_cor/resources/DICOM/files
-# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${ProcDir} ./7-anat_T1w_MPR_tra/resources/DICOM/files
+# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${MriStorageDir} ./1-anat_scout/resources/DICOM/files
+# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${MriStorageDir} ./2-anat_scout_MPR_sag/resources/DICOM/files
+# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${MriStorageDir} ./3-anat_scout_MPR_cor/resources/DICOM/files
+# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${MriStorageDir} ./4-anat_scout_MPR_tra/resources/DICOM/files
+dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${MriStorageDir} ./5-anat_T1w/resources/DICOM/files
+# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${MriStorageDir} ./6-anat_T1w_MPR_cor/resources/DICOM/files
+# dcm2niix -i n -b n -ba n -f %s_%p_%d -o ${MriStorageDir} ./7-anat_T1w_MPR_tra/resources/DICOM/files
 echo "##################################################################"
 echo "Conversion complete"
 
