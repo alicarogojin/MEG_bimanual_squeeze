@@ -171,3 +171,19 @@ create_epochs_1sec_20353.sh: essentially the same as for subsequent participants
 
 #### STEP 5: 
 -- "doSAM_bilateralsqueeze_beta_ERD.sh"
+
+This script computes a SAM whole brain map based on beta band ERD contrast between conditions specified in samparam files
+
+	Input: 
+		bimanualsqueeze_grandDS.ds for each participant
+	Process:
+		SAMcov
+		SAMsrc
+		Build whole brain map
+		Warp individual whole brain map to MNI space for group level analysis later
+	Dependencies:
+		Under /code/samparam/ are the text files that specify the conditions to contrast (marker timerange)
+		MNI_avg152T1_5mm.nii.gz
+		This script takes time to run, use nohup as scripted in "run_nohup_matlab"
+	Output: 
+		Whole brain map on beta ERD contrast between specified conditions warped to MNI space
