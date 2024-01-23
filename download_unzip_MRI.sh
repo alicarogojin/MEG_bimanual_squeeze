@@ -10,7 +10,7 @@ echo "" >! ${MRI_CURL_COOKIE_FILE}
 
 # shared by all XNAT REST API calls (via curl)
 # quiet mode; fail if HTTP response code not OK; store to and read from cookie file
-setenv MRI_CURL_COMMON_ARGS "--silent --show-error --fail -b ${MRI_CURL_COOKIE_FILE} -c ${MRI_CURL_COOKIE_FILE}"
+setenv MRI_CURL_COMMON_ARGS "--silent -k --show-error --fail -b ${MRI_CURL_COOKIE_FILE} -c ${MRI_CURL_COOKIE_FILE}"
 
 # request XNAT session
 # session info is stored in cookie file (see MRI_CURL_COMMON_ARGS) 
