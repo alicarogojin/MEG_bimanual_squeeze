@@ -113,7 +113,7 @@ unzip ${MriDirName}
 # STEP TWO - CONVERT TO .NII
 #----------------------------------------
 
-set RawDirRoot = ${MriStorageDir}/MRI/${SubjectID}/raw/${MriDirName}/scans
+set RawDirRoot = ${DownloadDir}/${MriDirName}/scans
 
 cd $RawDirRoot
 
