@@ -64,9 +64,9 @@ set XnatUrlProject = "https://rrinid.rotman-baycrest.on.ca/spred/data/projects"
 #----------------------------------------
 # 
 
-set MriStorageDir = /rri_disks/eugenia/meltzer_lab/wenjing_backup/mri/
+set MriStorageDir = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/
 # create directory to download to 
-set DownloadDir = ${MriStorageDir}/raw/${SubjectID}/
+set DownloadDir = ${MriStorageDir}/MRI/${SubjectID}/
 echo $DownloadDir
 mkdir $DownloadDir
 cd $DownloadDir
@@ -111,9 +111,9 @@ unzip ${MriDirName}
 # STEP TWO - CONVERT TO .NII
 #----------------------------------------
 
-set RawDirRoot = ${MriStorageDir}/raw/${SubjectID}/${MriDirName}/scans
+set RawDirRoot = ${MriStorageDir}/MRI/${SubjectID}/${MriDirName}/scans
 
-set ProcDir = ${MriStorageDir}/proc/${SubjectID}/
+set ProcDir = ${MriStorageDir}/MRI/${SubjectID}/unzip
 
 mkdir $ProcDir
 cd $RawDirRoot
