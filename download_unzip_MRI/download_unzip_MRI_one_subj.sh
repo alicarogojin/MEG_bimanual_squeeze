@@ -75,12 +75,12 @@ cd $DownloadDir
 # to see list of subject IDs
 echo "##################################################################"
 echo "List of SubjectIDs:"
-curl ${MRI_CURL_COMMON_ARGS} -X GET --url "${XnatUrlProject}/${ProjectLabel}/subjects?format=csv"  | awk -F'["_]' '$2 == "spred" {print $0}' | awk -F'["]' '{print $6}' | awk -F'[_]' '{print $NF}'
+curl -k ${MRI_CURL_COMMON_ARGS} -X GET --url "${XnatUrlProject}/${ProjectLabel}/subjects?format=csv"  | awk -F'["_]' '$2 == "spred" {print $0}' | awk -F'["]' '{print $6}' | awk -F'[_]' '{print $NF}'
 
 # to see sessions for a given subject
 echo "##################################################################"
 echo "List of sessions:"
-curl ${MRI_CURL_COMMON_ARGS} -X GET --url "${XnatUrlProject}/${ProjectLabel}/subjects/${RrinidSubj}/experiments?format=csv"  | awk -F'["]' '$2 ~ /^spred/ {print $10}' | cut -d'_' -f 5- 
+curl -k ${MRI_CURL_COMMON_ARGS} -X GET --url "${XnatUrlProject}/${ProjectLabel}/subjects/${RrinidSubj}/experiments?format=csv"  | awk -F'["]' '$2 ~ /^spred/ {print $10}' | cut -d'_' -f 5- 
 
 echo "OK to start the download now? (yes/no)"
 set is_ready_to_download=$<
@@ -94,8 +94,8 @@ echo "Subject ID ${SubjectID}, Scan date ${ScanDate}, Project ID ${ProjectID}"
 # to download scans for a given subject
 echo "##################################################################"
 echo "Downloading MRI and PHYSIO Data"
-curl ${MRI_CURL_COMMON_ARGS} -o ${MriDirName}.zip -X GET --url "${XnatUrlProject}/${ProjectLabel}/subjects/${RrinidSubj}/experiments/${MriDirName}/scans/ALL/resources/DICOM/files?format=zip"
-curl ${MRI_CURL_COMMON_ARGS} -o ${PhysDirName}.zip -X GET --url "${XnatUrlProject}/${ProjectLabel}/subjects/${RrinidSubj}/experiments/${PhysDirName}/scans/ALL/files?format=zip"
+curl -k ${MRI_CURL_COMMON_ARGS} -o ${MriDirName}.zip -X GET --url "${XnatUrlProject}/${ProjectLabel}/subjects/${RrinidSubj}/experiments/${MriDirName}/scans/ALL/resources/DICOM/files?format=zip"
+curl -k ${MRI_CURL_COMMON_ARGS} -o ${PhysDirName}.zip -X GET --url "${XnatUrlProject}/${ProjectLabel}/subjects/${RrinidSubj}/experiments/${PhysDirName}/scans/ALL/files?format=zip"
 echo "Download Complete"
 
 # unzip the zipped MRI files
