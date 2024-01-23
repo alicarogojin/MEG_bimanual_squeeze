@@ -19,8 +19,8 @@ if ($status > 0) then
     exit 1
 endif
 
-set SubjectIDs = "$<"
-set ScanDates = "$<" # YYYMMDD date of the MRI scan matching the subject (found in XNAT)
+set SubjectIDs = (20124 20157)
+set ScanDates = (20230411 20230512) # YYYMMDD date of the MRI scan matching the subject (found in XNAT)
 set ProjectIDs = (185)
 
 foreach Index (`seq $#SubjectIDs`)
