@@ -21,7 +21,7 @@ endif
 
 set SubjectIDs = (20124 20157)
 set ScanDates = (20230411 20230512) # YYYMMDD date of the MRI scan matching the subject (found in XNAT)
-set ProjectIDs = (185)
+set ProjectIDs = (185 185) # repeat to match the number of participants looping this through
 
 foreach Index (`seq $#SubjectIDs`)
     ${MriScriptDir}/download_unzip_MRI_one_subj.sh -s ${SubjectIDs[$Index]} -d ${ScanDates[$Index]} -p ${ProjectIDs[$Index]}
