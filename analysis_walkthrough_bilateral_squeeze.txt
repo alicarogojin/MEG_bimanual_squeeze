@@ -137,23 +137,36 @@ create_epochs_1sec_20353.sh: essentially the same as for subsequent participants
 
 
 #### STEP 4: Make the MRI head model
--- "download&unzip_MRI.sh"
-		This script downloads MRI scans from the XNAT server to our server.
-		Get them in .nii format. Put under auto/iduna/arogojin/bilateral_squeeze_test/MRI/${subj}/anat/.
+-- "download_unzip_MRI.sh"
 
-		Open up Brainsight in the TMS room, look at participant fiducial point pictures and mark them on Brainsight.
-		Take screenshots of the fiducial points on Brainsight and save to the server.
-		Mark fiducial points in the .mprage or .nii file in AFNI according to the screenshots.
-		Fiducial points were only marked for aligning the MRI to MEG head space (orthogonal: forward tilting).
+	Input:
+		This script downloads MRI scans from the XNAT server to our server.
+	Dependencies:
+		3 scripts under download_unzip_MRI directory
+		"request_session.sh", "download_unzip_MRI_one_subj.sh", "delete_session.sh"
+	Process:
+		(1) Prompted to input XNAT server username and password
+		(2) Lists all subjects in MRI project 185, prompted to type "yes" to continue with download
+		(3) Will download all zipped MRI data under the subject's raw directory in 
+		    /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MRI
+
+	Output:
+		.nii files (5_anat-T1w_anat-T1w.nii) under /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/MRI/${subj}
+		Used for MEG coregistration in the steps below.
+
+-- mark fiducials in BrainSight
+	Open up Brainsight in the TMS room, look at participant fiducial point pictures and mark them on Brainsight.
+	Take screenshots of the fiducial points on Brainsight and save to the server.
+	Fiducial points were only marked for aligning the MRI to MEG head space (orthogonal: forward tilting).
 
 -- go into "/make_headmodel" directory and follow instructions in the README.md document
-Briefly,
-1) Run "3dcopy.sh"
-2) Mark fiducials in AFNI
-3) Run "create_brainhull.sh"
-4) Run "warp_anat.sh"
-5) Run contents of "/changeheadpos_continuous_data" directory
-6) Run "create_spheres.sh"
+	Briefly,
+	1) Run "3dcopy.sh"
+	2) Mark fiducial points in the .nii file in AFNI according to the screenshots from above
+	3) Run "create_brainhull.sh"
+	4) Run "warp_anat.sh"
+	5) Run contents of "/changeheadpos_continuous_data" directory
+	6) Run "create_spheres.sh"
 
 
 #### STEP 5: 
