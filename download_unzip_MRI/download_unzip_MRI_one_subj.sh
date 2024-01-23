@@ -64,7 +64,7 @@ set XnatUrlProject = "https://rrinid.rotman-baycrest.on.ca/spred/data/projects"
 #----------------------------------------
 # 
 
-set MriStorageDir = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze/
+set MriStorageDir = /rri_disks/eugenia/meltzer_lab/bilateral_squeeze
 # create directory to download to 
 set DownloadDir = ${MriStorageDir}/MRI/${SubjectID}/raw/
 echo $DownloadDir
