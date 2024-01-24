@@ -10,7 +10,8 @@ First, dump HLC channels to `.dat` files for use in Matlab by running:
 ```bash
 ./create_hlc_dat.sh
 ```
-Second, __open up Matlab__ and plot the HLC readings by running this script: `changeheadpos_fiducial_visual_check.m`. 
+Second, __open up Matlab__ and plot the HLC readings by running this Matlab[^Matlab_run] script: `changeheadpos_fiducial_visual_check.m`. 
+[^Matlab_run]: e.g. by `matlab my_script_name.m` in a shell
 
 Output will look something like this (all head motion is <0.5mm, which is good):
 
